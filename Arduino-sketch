@@ -1,0 +1,74 @@
+/*
+  Button
+
+  Turns on and off the coffee machine connected via a relay to pin 12,
+  when activating the isolation switch attached to pin 6.
+
+  
+
+  The circuit:
+  - Relay attached from pin 6 to ground
+  - Relay wired into the on off switch of the coffee machine.
+  - isolation switch attached to pin 12 from +5V
+  - 10K resistor attached to pin A0 from ground
+  -Displays the circuit being on via LED attached to pin 13
+
+  
+  created 2020
+  by Ben Paton - makehackvoid.com
+  modified 09/02/2020
+  
+
+  This code is in the public domain.
+
+*/
+
+// used to set what each pin does
+
+const int ledPin = 13; //On/Off indicator
+const int switchPin = 12; // Switch to turn coffee machine on and off
+const int coffeerelay = 6; //relay wired into coffee machine on/off switch
+
+
+// used to set variable states on startup
+int
+switchState = 0;         
+
+
+void
+setup()
+
+{
+
+  pinMode(switchPin, INPUT); 
+  pinMode(ledPin, OUTPUT); 
+  pinMode(coffeerelay, OUTPUT);
+
+}
+
+
+
+void
+loop()
+
+{
+  switchState = digitalRead(switchPin);
+
+  if (switchState == HIGH ) 
+
+
+  {
+    digitalWrite(ledPin, HIGH); //turn the led on
+    digitalWrite(coffeerelay, HIGH); //turn the coffee machine on
+  }
+
+  else
+
+  {
+
+    digitalWrite(ledPin, LOW); // Turn off LED power indicator
+    digitalWrite(coffeerelay, LOW); //Turn off coffee machine
+    
+  }
+
+}
